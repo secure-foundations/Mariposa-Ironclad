@@ -1418,7 +1418,7 @@ method MarshallArray(val:V, grammar:G, data:array<byte>, index:uint64) returns (
   ensures  forall i :: (index as int) + SizeOfV(val) <= i < data.Length ==> data[i] == old(data[i])
   ensures  (size as int) == SizeOfV(val)
 {
-  //assert{:split_here} true;
+  // assert{:split_here} true;
   reveal parse_Val();
   MarshallUint64(|val.a| as uint64, data, index);
 
@@ -1433,9 +1433,7 @@ method MarshallArray(val:V, grammar:G, data:array<byte>, index:uint64) returns (
   rest := tuple.1;
   assert !len.None?;
   ghost var contents_tuple := parse_Array_contents(rest, grammar.elt, len.v.u);
-  ghost var contents  := contents_tuple.0;
-  ghost var remainder := contents_tuple.1;
-  assert !contents.None?;
+  reveal parse_Array_contents();
   size := 8 + contents_size;
 }
 
@@ -1709,11 +1707,6 @@ method MarshallByteArray(val:V, grammar:G, data:array<byte>, index:uint64) retur
   assert SeqByteToUint64(data[index..index+Uint64Size()]) == (|val.b| as uint64);
   MarshallBytes(val.b, data, index + 8);
 
-  calc {
-    parse_Val(data[index..(index as int) + SizeOfV(val)], grammar);
-      { reveal parse_Val(); }
-    parse_ByteArray(data[index..(index as int) + SizeOfV(val)]);
-  }
   ghost var data_seq := data[index..(index as int) + SizeOfV(val)];
   ghost var tuple := parse_Uint64(data_seq);
   ghost var len := tuple.0;
@@ -1721,6 +1714,14 @@ method MarshallByteArray(val:V, grammar:G, data:array<byte>, index:uint64) retur
   assert{:split_here} true;
   assert len.v.u == |val.b| as uint64;
   
+  calc {
+    parse_Val(data_seq, grammar);
+      { reveal parse_Val(); }
+    parse_ByteArray(data_seq);
+  }
+
+  assert parse_ByteArray(data_seq).0.Some?;
+
   assert rest == data[index + 8..(index as int) + SizeOfV(val)] == val.b;
   assert !len.None? && (len.v.u as int) <= |rest|;
   assert rest[0..len.v.u] == val.b;       // OBSERVE
