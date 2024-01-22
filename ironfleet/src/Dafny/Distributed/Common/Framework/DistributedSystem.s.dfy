@@ -29,7 +29,7 @@ datatype DS_State = DS_State(
   )
 
 predicate DS_Init(s:DS_State, config:H_s.ConcreteConfiguration)
-  reads *
+  // reads *
 {
   && s.config == config
   && H_s.ConcreteConfigToServers(s.config) == mapdomain(s.servers)
@@ -40,7 +40,7 @@ predicate DS_Init(s:DS_State, config:H_s.ConcreteConfiguration)
   
 predicate DS_NextOneServer(s:DS_State, s':DS_State, id:EndPoint, ios:seq<LIoOp<EndPoint,seq<byte>>>)
   requires id in s.servers
-  reads *
+  // reads *
 {
   && id in s'.servers
   && H_s.HostNext(s.servers[id], s'.servers[id], ios)
@@ -48,7 +48,7 @@ predicate DS_NextOneServer(s:DS_State, s':DS_State, id:EndPoint, ios:seq<LIoOp<E
 }
 
 predicate DS_Next(s:DS_State, s':DS_State)
-  reads *
+  // reads *
 {
   && s'.config == s.config
   && LEnvironment_Next(s.environment, s'.environment)

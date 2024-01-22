@@ -5,9 +5,9 @@ import opened Native__NativeTypes_s
 import opened Native__Io_s
 
 type Bytes = seq<byte>
-type AppState = Bytes
-type AppRequest = Bytes
-type AppReply = Bytes
+type AppState = seq<byte>
+type AppRequest = seq<byte>
+type AppReply = seq<byte>
 
 function {:axiom} AppInitialize() : AppState
 function {:axiom} AppHandleRequest(m:AppState, request:AppRequest) : (AppState, AppReply)

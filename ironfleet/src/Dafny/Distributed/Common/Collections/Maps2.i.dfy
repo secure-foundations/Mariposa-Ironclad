@@ -38,7 +38,7 @@ predicate behaviorMonotonic<S>(b:imap<int, S>, f:imap<S, int>)
 // TODO_MODULE: module Collections__Maps2_i {
 // TODO_MODULE: import opened Collections__Maps2_s
 
-lemma Lemma_EqualityConditionForMapsWithSameDomain<S, T>(m1:map<S, T>, m2:map<S, T>)
+lemma Lemma_EqualityConditionForMapsWithSameDomain<S(!new), T>(m1:map<S, T>, m2:map<S, T>)
   requires mapdomain(m1) == mapdomain(m2)
   requires forall s :: s in m1 && s in m2 ==> m1[s] == m2[s]
   ensures  m1 == m2

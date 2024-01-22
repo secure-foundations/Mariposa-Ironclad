@@ -11,15 +11,15 @@ type HostState
 type ConcreteConfiguration
 
 predicate HostInit(host_state:HostState, config:ConcreteConfiguration, id:EndPoint)
-  reads *
+  // reads *
 predicate HostNext(host_state:HostState, host_state':HostState, ios:seq<LIoOp<EndPoint, seq<byte>>>)
-  reads *
+  // reads *
 
 predicate ConcreteConfigInit(config:ConcreteConfiguration)
 function ConcreteConfigToServers(config:ConcreteConfiguration) : set<EndPoint>
 
 predicate HostStateInvariants(host_state:HostState, env:HostEnvironment)
-  reads *
+  // reads *
 
 function ParseCommandLineConfiguration(args:seq<seq<byte>>) : ConcreteConfiguration
 

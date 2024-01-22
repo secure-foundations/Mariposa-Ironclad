@@ -5,7 +5,10 @@ module AppInterface_i refines AppInterface_s {
 import opened Bytes_s
 export Spec
     provides Native__NativeTypes_s
-    reveals Key // provides Key REVIEW: triggers a Dafny bug
+    reveals Key
+    provides Key 
+    // REVIEW: triggers a Dafny bug
+    reveals Value
     provides Value
     provides KeyLt
     provides lemma_KeyOrdering

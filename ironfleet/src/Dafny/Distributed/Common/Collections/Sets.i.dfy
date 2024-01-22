@@ -44,27 +44,24 @@ lemma ThingsIKnowAboutASingletonSet<T>(foo:set<T>, x:T, y:T)
 }
 
 predicate Injective<X(!new), Y>(f:X-->Y)
-  reads f.reads
   requires forall x :: f.requires(x)
 {
   forall x1, x2 :: f(x1) == f(x2) ==> x1 == x2
 }
 
-predicate InjectiveOver<X, Y>(xs:set<X>, ys:set<Y>, f:X-->Y)
-  reads f.reads
+predicate InjectiveOver<X(!new), Y>(xs:set<X>, ys:set<Y>, f:X-->Y)
   requires forall x :: x in xs ==> f.requires(x)
 {
   forall x1, x2 :: x1 in xs && x2 in xs && f(x1) in ys && f(x2) in ys && f(x1) == f(x2) ==> x1 == x2
 }
 
-predicate InjectiveOverSeq<X, Y>(xs:seq<X>, ys:set<Y>, f:X-->Y)
-  reads f.reads
+predicate InjectiveOverSeq<X(!new), Y>(xs:seq<X>, ys:set<Y>, f:X-->Y)
   requires forall x :: x in xs ==> f.requires(x)
 {
   forall x1, x2 :: x1 in xs && x2 in xs && f(x1) in ys && f(x2) in ys && f(x1) == f(x2) ==> x1 == x2
 }
 
-lemma lemma_MapSetCardinality<X, Y>(xs:set<X>, ys:set<Y>, f:X-->Y)
+lemma lemma_MapSetCardinality<X(!new), Y>(xs:set<X>, ys:set<Y>, f:X-->Y)
   requires forall x :: f.requires(x)
   requires Injective(f)
   requires forall x :: x in xs <==> f(x) in ys
@@ -80,7 +77,7 @@ lemma lemma_MapSetCardinality<X, Y>(xs:set<X>, ys:set<Y>, f:X-->Y)
   }
 }
 
-lemma lemma_MapSetCardinalityOver<X, Y>(xs:set<X>, ys:set<Y>, f:X-->Y)
+lemma lemma_MapSetCardinalityOver<X(!new), Y>(xs:set<X>, ys:set<Y>, f:X-->Y)
   requires forall x :: x in xs ==> f.requires(x)
   requires InjectiveOver(xs, ys, f)
   requires forall x :: x in xs ==> f(x) in ys
@@ -96,7 +93,7 @@ lemma lemma_MapSetCardinalityOver<X, Y>(xs:set<X>, ys:set<Y>, f:X-->Y)
   }
 }
 
-lemma lemma_MapSubsetCardinalityOver<X, Y>(xs:set<X>, ys:set<Y>, f:X-->Y)
+lemma lemma_MapSubsetCardinalityOver<X(!new), Y>(xs:set<X>, ys:set<Y>, f:X-->Y)
   requires forall x :: x in xs ==> f.requires(x)
   requires InjectiveOver(xs, ys, f)
   requires forall x :: x in xs ==> f(x) in ys
@@ -111,7 +108,7 @@ lemma lemma_MapSubsetCardinalityOver<X, Y>(xs:set<X>, ys:set<Y>, f:X-->Y)
   }
 }
 
-lemma lemma_MapSubseqCardinalityOver<X, Y>(xs:seq<X>, ys:set<Y>, f:X-->Y)
+lemma lemma_MapSubseqCardinalityOver<X(!new), Y>(xs:seq<X>, ys:set<Y>, f:X-->Y)
   requires forall x :: x in xs ==> f.requires(x)
   requires forall i, j :: 0 <= i < |xs| && 0 <= j < |xs| && i != j ==> xs[i] != xs[j]
   requires InjectiveOverSeq(xs, ys, f)
@@ -155,8 +152,7 @@ function/*TODO:{:opaque}*/ MapSetToSet<X(!new), Y>(xs:set<X>, f:X-->Y):set<Y>
   ys
 }
 
-function/*TODO:{:opaque}*/ MapSetToSetOver<X, Y>(xs:set<X>, f:X-->Y):set<Y>
-  reads f.reads
+function/*TODO:{:opaque}*/ MapSetToSetOver<X(!new), Y>(xs:set<X>, f:X-->Y):set<Y>
   requires forall x :: x in xs ==> f.requires(x)
   requires InjectiveOver(xs, set x | x in xs :: f(x), f)
   ensures  forall x :: x in xs ==> f(x) in MapSetToSetOver(xs, f)

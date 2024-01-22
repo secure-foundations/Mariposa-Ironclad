@@ -2,12 +2,12 @@
 
 module Collections__Maps2_s {
 
-function mapdomain<KT,VT>(m:map<KT,VT>) : set<KT>
+function mapdomain<KT(!new),VT>(m:map<KT,VT>) : set<KT>
 {
   set k | k in m :: k
 }
 
-function mapremove<KT,VT>(m:map<KT,VT>, k:KT) : map<KT,VT>
+function mapremove<KT(!new),VT>(m:map<KT,VT>, k:KT) : map<KT,VT>
 {
   map ki | ki in m && ki != k :: m[ki]
 }

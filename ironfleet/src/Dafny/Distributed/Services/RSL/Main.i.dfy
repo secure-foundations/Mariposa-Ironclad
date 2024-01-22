@@ -40,7 +40,7 @@ import opened Environment_s
 import opened Math__mod_auto_i
 
 predicate IsValidBehavior(config:ConcreteConfiguration, db:seq<DS_State>)
-  reads *
+  // reads *
 {
   && |db| > 0
   && DS_Init(db[0], config)

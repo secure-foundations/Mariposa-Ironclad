@@ -12,14 +12,14 @@ import opened Temporal__Rules_i
 import opened Temporal__Induction_i
 import opened Collections__Maps2_s
 
-predicate LEnvironmentInvariant<IdType, MessageType>(
+predicate LEnvironmentInvariant<IdType(!new), MessageType>(
   e:LEnvironment<IdType, MessageType>
   )
 {
   forall p, id :: id in e.hostInfo && p in e.hostInfo[id].queue ==> p in e.sentPackets
 }
 
-lemma Lemma_LEnvironmentInitEstablishesInvariant<IdType, MessageType>(
+lemma Lemma_LEnvironmentInitEstablishesInvariant<IdType(!new), MessageType>(
   e:LEnvironment<IdType, MessageType>
   )
   requires LEnvironment_Init(e)
@@ -28,7 +28,7 @@ lemma Lemma_LEnvironmentInitEstablishesInvariant<IdType, MessageType>(
 {
 }
 
-lemma Lemma_HostQueuePerformIosProducesTail<IdType, MessageType>(
+lemma Lemma_HostQueuePerformIosProducesTail<IdType(!new), MessageType>(
   hostQueue:seq<LPacket<IdType, MessageType>>,
   hostQueue':seq<LPacket<IdType, MessageType>>,
   ios:seq<LIoOp<IdType, MessageType>>
@@ -47,7 +47,7 @@ lemma Lemma_HostQueuePerformIosProducesTail<IdType, MessageType>(
   }
 }
 
-lemma Lemma_LEnvironmentNextPreservesInvariant<IdType, MessageType>(
+lemma Lemma_LEnvironmentNextPreservesInvariant<IdType(!new), MessageType>(
   e:LEnvironment<IdType, MessageType>,
   e':LEnvironment<IdType, MessageType>
   )
@@ -79,7 +79,7 @@ lemma Lemma_LEnvironmentNextPreservesInvariant<IdType, MessageType>(
   }
 }
 
-lemma Lemma_IfOpSeqIsCompatibleWithReductionThenSoIsSuffix<IdType, MessageType>(
+lemma Lemma_IfOpSeqIsCompatibleWithReductionThenSoIsSuffix<IdType(!new), MessageType>(
   ios:seq<LIoOp<IdType, MessageType>>,
   j:int
   )
@@ -95,7 +95,7 @@ lemma Lemma_IfOpSeqIsCompatibleWithReductionThenSoIsSuffix<IdType, MessageType>(
   }
 }
 
-lemma Lemma_IfOpSeqIsCompatibleWithReductionAndFirstIsntReceiveThenNoneAreReceives<IdType, MessageType>(
+lemma Lemma_IfOpSeqIsCompatibleWithReductionAndFirstIsntReceiveThenNoneAreReceives<IdType(!new), MessageType>(
   ios:seq<LIoOp<IdType, MessageType>>
   )
   requires LIoOpSeqCompatibleWithReduction(ios)
@@ -112,7 +112,7 @@ lemma Lemma_IfOpSeqIsCompatibleWithReductionAndFirstIsntReceiveThenNoneAreReceiv
   }
 }
 
-predicate HostQueueDecomposition<IdType, MessageType>(
+predicate HostQueueDecomposition<IdType(!new), MessageType>(
   hostQueue:seq<LPacket<IdType, MessageType>>,
   hostQueue':seq<LPacket<IdType, MessageType>>,
   s1:seq<LPacket<IdType, MessageType>>,
@@ -123,7 +123,7 @@ predicate HostQueueDecomposition<IdType, MessageType>(
   hostQueue == s1 + [p] + s2 + hostQueue'
 }
 
-lemma Lemma_ReceiveRemovesPacketFromHostQueue<IdType, MessageType>(
+lemma Lemma_ReceiveRemovesPacketFromHostQueue<IdType(!new), MessageType>(
   hostQueue:seq<LPacket<IdType, MessageType>>,
   hostQueue':seq<LPacket<IdType, MessageType>>,
   ios:seq<LIoOp<IdType, MessageType>>,
@@ -171,7 +171,7 @@ lemma Lemma_ReceiveRemovesPacketFromHostQueue<IdType, MessageType>(
   assert HostQueueDecomposition(hostQueue, hostQueue', s1, s2, p);
 }
 
-lemma Lemma_RemovePacketFromHostQueueImpliesReceive<IdType, MessageType>(
+lemma Lemma_RemovePacketFromHostQueueImpliesReceive<IdType(!new), MessageType>(
   hostQueue:seq<LPacket<IdType, MessageType>>,
   hostQueue':seq<LPacket<IdType, MessageType>>,
   ios:seq<LIoOp<IdType, MessageType>>,
@@ -198,7 +198,7 @@ lemma Lemma_RemovePacketFromHostQueueImpliesReceive<IdType, MessageType>(
   }
 }
 
-lemma Lemma_ReceiveMakesHostQueueSmaller<IdType, MessageType>(
+lemma Lemma_ReceiveMakesHostQueueSmaller<IdType(!new), MessageType>(
   hostQueue:seq<LPacket<IdType, MessageType>>,
   hostQueue':seq<LPacket<IdType, MessageType>>,
   ios:seq<LIoOp<IdType, MessageType>>,
@@ -212,7 +212,7 @@ lemma Lemma_ReceiveMakesHostQueueSmaller<IdType, MessageType>(
   Lemma_ReceiveRemovesPacketFromHostQueue(hostQueue, hostQueue', ios, p);
 }
 
-lemma Lemma_HostQueuePerformIosReceivesFromHostQueue<IdType, MessageType>(
+lemma Lemma_HostQueuePerformIosReceivesFromHostQueue<IdType(!new), MessageType>(
   hostQueue:seq<LPacket<IdType, MessageType>>,
   hostQueue':seq<LPacket<IdType, MessageType>>,
   ios:seq<LIoOp<IdType, MessageType>>

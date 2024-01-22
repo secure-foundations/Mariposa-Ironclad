@@ -51,7 +51,7 @@ module Main_i refines Main_s {
         provides IronfleetMain
 
     predicate IsValidBehavior(config:ConcreteConfiguration, db:seq<DS_State>)
-        reads *;
+        // reads *;
     {
            |db| > 0
         && DS_Init(db[0], config)
