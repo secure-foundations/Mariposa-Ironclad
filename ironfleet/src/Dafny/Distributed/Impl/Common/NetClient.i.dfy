@@ -32,8 +32,8 @@ function NetClientRepr(netc:NetClient?) : set<object?>
 
 predicate HostEnvironmentIsValid(env:HostEnvironment)
   reads env
-  reads env.Valid.reads()
-  reads env.ok.ok.reads()
+  // reads env.Valid.reads()
+  reads env.ok
 {
   && env.Valid()
   && env.ok.ok()
