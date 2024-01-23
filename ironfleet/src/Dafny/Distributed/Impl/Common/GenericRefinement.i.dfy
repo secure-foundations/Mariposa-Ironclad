@@ -109,7 +109,6 @@ lemma Lemma_AbstractifyMap_append<KT(!new),VT(!new),CKT(!new),CVT(!new)>(cm:map<
         assert rk in rm;
         assert rk in rm';
         assert rk in r_cm';
-        assume false;
       } else {
         assert preimage == ck;
         assert RefineKey(preimage) in r_cm';
@@ -117,7 +116,6 @@ lemma Lemma_AbstractifyMap_append<KT(!new),VT(!new),CKT(!new),CVT(!new)>(cm:map<
     }
     // reveal AbstractifyMap();
   }
-  assume false;
 
   forall rk | rk in r_cm'
     ensures rk in rm'

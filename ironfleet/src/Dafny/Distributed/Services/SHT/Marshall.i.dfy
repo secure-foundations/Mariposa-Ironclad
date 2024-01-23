@@ -368,7 +368,7 @@ module MarshallProof_i {
                   { lemma_SeqOffset(data, rest0, 8, 32 + len_dst as int, 40 + len_dst as int); }
                 data[40+len_dst as int..48+len_dst as int];
             }
-            assume false;
+
             var byteLen, bytesVal, rest6 := lemma_ParseValCorrectVByteArray(rest5, valCaseVal, GByteArray);
             assert data[..56+(len_dst as int)+(byteLen as int)] == 
                                  [ 0, 0, 0, 0, 0, 0, 0, 0] 
@@ -389,7 +389,6 @@ module MarshallProof_i {
             assert |data| == 56 + (len_dst as int) + (byteLen as int);
             assert bytes == MarshallServiceSetRequest(AppSetRequest(msg.seqno, msg.m.k_setrequest, msg.m.v_setrequest), reserved_bytes);
         } else {
-            assume false;
             assert cmsg.m.v_setrequest.ValueAbsent?;
             assert valCaseId == 1;
             assert 1 == SeqByteToUint64(rest4[..8]);
@@ -443,161 +442,157 @@ module MarshallProof_i {
         ensures  msg.m.k_reply == reply.k;
         ensures  msg.m.v       == reply.ov;
     {
-        var marshalled_bytes := MarshallServiceReply(reply, reserved_bytes);
         var g := CSingleMessage_grammar();
-        if 0 <= reply.seqno < 0x1_0000_0000_0000_0000 {
-            var cmsg := SHTDemarshallData(bytes);
-            var data := bytes;
-            var v := DemarshallFunc(data, g);
 
-            // Walk through the generic parsing process
-            var msgCaseId, msgCaseVal, rest0 := lemma_ParseValCorrectVCase(data, v, g);
-            var seqnoVal, dstVal, msgVal, rest1, rest2 := lemma_ParseValCorrectTuple3(rest0, msgCaseVal, g.cases[msgCaseId]);
-            var mCaseId, mCaseVal, rest3 := lemma_ParseValCorrectVCase(rest2, msgVal, g.cases[msgCaseId].t[2]);
-
-            // Prove that the first 8 bytes are correct
-            assert msgCaseId == 0;
-            assert 0 == SeqByteToUint64(bytes[..8]);
-            assert bytes[..8] == [ 0, 0, 0, 0, 0, 0, 0, 0];
-
-            // Prove that the next 8 bytes of seqno are correct
-            var u, rest := lemma_ParseValCorrectVUint64(rest0, seqnoVal, GUint64);
-            lemma_2toX();
-            calc {
-                u;
-                parse_Uint64(rest0).0.v.u;
-                SeqByteToUint64(rest0[..8]);
-                SeqByteToUint64(Uint64ToBytes(reply.seqno as uint64));
-                SeqByteToUint64(Uint64ToSeqByte(reply.seqno as uint64));
-                SeqByteToUint64(BEUintToSeqByte(reply.seqno as uint64 as int, 8));
-                    { lemma_BEByteSeqToInt_BEUintToSeqByte_invertability(); }
-                reply.seqno as uint64;
-            }
-            assert msg.seqno == u as int;
-            assert reply.seqno == msg.seqno;
-
-            var len_dst_uint64, val_dst, rest_dst := lemma_ParseValCorrectVByteArray(rest1, dstVal, EndPoint_grammar());
-            var len_dst := len_dst_uint64 as int;
-
-            // Prove some length relationships to show that our indices are within bounds
-            calc ==> {
-               true;
-               rest0 == parse_Uint64(data).1;
-               |rest0| == |data| - 8;
-            }
-            calc ==> {
-               true;
-               rest1 == parse_Uint64(rest0).1;
-               |rest1| == |rest0| - 8;
-            }
-            calc ==> {
-               true;
-               |rest2| == |rest1| - 8 - len_dst;
-            }
-            calc ==> {
-               true;
-               rest3 == parse_Uint64(rest2).1;
-               |rest3| == |rest2| - 8;
-            }
-
-            assert rest0 == data[8..];
-            assert rest1 == rest0[8..] == data[16..];
-            assert rest2 == rest1[8 + len_dst..] == data[24 + len_dst..];
-            assert rest3 == rest2[8..] == data[32 + len_dst..];
-
-            assert data[16..24] == Uint64ToSeqByte(|reserved_bytes| as uint64);
-            assert SeqByteToUint64(data[16..24]) == |reserved_bytes| as uint64 by {
-              lemma_BEByteSeqToInt_BEUintToSeqByte_invertability();
-            }
-            assert len_dst_uint64 == SeqByteToUint64(rest1[..8]) == SeqByteToUint64(data[16..24]) == |reserved_bytes| as uint64;
-            assert len_dst == |reserved_bytes|;
-
-            calc {
-              val_dst.b;
-              rest_dst[0..len_dst_uint64];
-              rest_dst[0..len_dst];
-              rest1[8..][0..len_dst];
-                { lemma_SeqOffset(rest1, rest1[8..], 8, 0, len_dst); }
-              rest1[8 .. 8 + len_dst];
-              data[16..][8 .. 8 + len_dst];
-                { lemma_SeqOffset(data, data[16..], 16, 8, 8 + len_dst); }
-              data[24 .. 24 + len_dst];
-                { lemma_ParseMarshallReplyHelper(bytes, reply, reserved_bytes); }
-              reserved_bytes;
-            }
-
-            assert rest2[..8] == data[24 + len_dst .. 32 + len_dst] == [0, 0, 0, 0, 0, 0, 0, 2];
-            assert mCaseId == 2;
-           
-            var keyVal, optValueVal, rest4 := lemma_ParseValCorrectTuple2(rest3, mCaseVal, g.cases[msgCaseId].t[2].cases[mCaseId]);
-            var valCaseId, valCaseVal, rest5 := lemma_ParseValCorrectVCase(rest4, optValueVal, OptionalValue_grammar());
-
-            assume rest4 == rest3[8..] == data[40 + len_dst..];
-
-            // Prove that the key is handled correctly
-            var key, rest_key := lemma_ParseValCorrectVUint64(rest3, keyVal, GUint64);
-            calc {
-                msg.m.k_reply;
-                key;
-                parse_Uint64(rest3).0.v.u;
-                parse_Uint64(MarshallSHTKey(reply.k)).0.v.u;
-                SeqByteToUint64(MarshallSHTKey(reply.k));
-                SeqByteToUint64(Uint64ToBytes(reply.k));
-                SeqByteToUint64(Uint64ToSeqByte(reply.k));
-                SeqByteToUint64(BEUintToSeqByte(reply.k as int, 8));
-                    { lemma_BEByteSeqToInt_BEUintToSeqByte_invertability(); }
-                reply.k;
-            }
-
-            calc {
-              rest4[..8];
-              rest4[0..8];
-                { lemma_SeqOffset(rest3, rest4, 8, 0, 8); }
-              rest3[8..16];
-                { lemma_SeqOffset(rest2, rest3, 8, 8, 16); }
-              rest2[16..24];
-                { lemma_SeqOffset(rest1, rest2, 8 + len_dst, 16, 24); }
-              rest1[24+len_dst..32+len_dst];
-                { lemma_SeqOffset(rest0, rest1, 8, 24 + len_dst, 32 + len_dst); }
-              rest0[32+len_dst..40+len_dst];
-                { lemma_SeqOffset(data, rest0, 8, 32 + len_dst, 40 + len_dst); }
-              data[40+len_dst..48+len_dst];
-            }
-
-            // Handle the two subcases of OptionalValue
-            if reply.ov.ValuePresent? {
-                assert rest4[..8] == [ 0, 0, 0, 0, 0, 0, 0, 0];
-
-                assert rest5 == parse_Uint64(rest4).1;
-                assert |rest5| == |rest4| - 8;
-                assert |rest5| < 0x1_0000_0000_0000_0000;
-
-                var byteLen, bytesVal, rest6 := lemma_ParseValCorrectVByteArray(rest5, valCaseVal, GByteArray);
-                calc {
-                    byteLen;
-                    parse_Uint64(rest5).0.v.u;
-                    SeqByteToUint64(rest5[..8]);
-                    SeqByteToUint64(Uint64ToBytes(|reply.ov.v| as uint64));
-                    SeqByteToUint64(Uint64ToSeqByte(|reply.ov.v| as uint64));
-                    SeqByteToUint64(BEUintToSeqByte(|reply.ov.v| as uint64 as int, 8));
-                        { lemma_BEByteSeqToInt_BEUintToSeqByte_invertability(); }
-                    |reply.ov.v| as uint64;
-                }
-                assert |bytesVal.b| == |msg.m.v.v|;
-                assert bytesVal.b == msg.m.v.v;
-
-                assert |bytesVal.b| == |reply.ov.v|;
-                assert bytesVal.b == reply.ov.v;
-
-                assert msg.m.v == reply.ov;
-            } else {
-                assert rest4[..8] == [ 0, 0, 0, 0, 0, 0, 0, 1];
-            }
-        } else {
+        if !(0 <= reply.seqno < 0x1_0000_0000_0000_0000) {
             assert bytes == [1];
             reveal_parse_Val();
             assert parse_Val(bytes, g).0.None?;
             assert false;
+            return;
+        }
+
+        var marshalled_bytes := MarshallServiceReply(reply, reserved_bytes);
+
+        var cmsg := SHTDemarshallData(bytes);
+        var data := bytes;
+        var v := DemarshallFunc(data, g);
+
+        // Walk through the generic parsing process
+        var msgCaseId, msgCaseVal, rest0 := lemma_ParseValCorrectVCase(data, v, g);
+        var seqnoVal, dstVal, msgVal, rest1, rest2 := lemma_ParseValCorrectTuple3(rest0, msgCaseVal, g.cases[msgCaseId]);
+        var mCaseId, mCaseVal, rest3 := lemma_ParseValCorrectVCase(rest2, msgVal, g.cases[msgCaseId].t[2]);
+
+        // Prove that the first 8 bytes are correct
+        assert msgCaseId == 0;
+        assert 0 == SeqByteToUint64(bytes[..8]);
+        assert bytes[..8] == [ 0, 0, 0, 0, 0, 0, 0, 0];
+
+        // Prove that the next 8 bytes of seqno are correct
+        var u, rest := lemma_ParseValCorrectVUint64(rest0, seqnoVal, GUint64);
+        lemma_2toX();
+        calc {
+            u;
+            parse_Uint64(rest0).0.v.u;
+            SeqByteToUint64(rest0[..8]);
+            SeqByteToUint64(Uint64ToBytes(reply.seqno as uint64));
+            SeqByteToUint64(Uint64ToSeqByte(reply.seqno as uint64));
+            SeqByteToUint64(BEUintToSeqByte(reply.seqno as uint64 as int, 8));
+                { lemma_BEByteSeqToInt_BEUintToSeqByte_invertability(); }
+            reply.seqno as uint64;
+        }
+        assert msg.seqno == u as int;
+        assert reply.seqno == msg.seqno;
+
+        var len_dst_uint64, val_dst, rest_dst := lemma_ParseValCorrectVByteArray(rest1, dstVal, EndPoint_grammar());
+        var len_dst := len_dst_uint64 as int;
+
+        // Prove some length relationships to show that our indices are within bounds
+        assert |rest0| == |data| - 8 by {
+            assert rest0 == parse_Uint64(data).1;
+        }
+
+        assert |rest1| == |rest0| - 8 by {
+            assert rest1 == parse_Uint64(rest0).1;
+        }
+
+        assert |rest2| == |rest1| - 8 - len_dst;
+
+        assert |rest3| == |rest2| - 8 by {
+            assert rest3 == parse_Uint64(rest2).1;
+        }
+
+        assert rest0 == data[8..];
+        assert rest1 == rest0[8..] == data[16..];
+        assert rest2 == rest1[8 + len_dst..] == data[24 + len_dst..];
+        assert rest3 == rest2[8..] == data[32 + len_dst..];
+
+        assert data[16..24] == Uint64ToSeqByte(|reserved_bytes| as uint64);
+        assert SeqByteToUint64(data[16..24]) == |reserved_bytes| as uint64 by {
+          lemma_BEByteSeqToInt_BEUintToSeqByte_invertability();
+        }
+        assert len_dst_uint64 == SeqByteToUint64(rest1[..8]) == SeqByteToUint64(data[16..24]) == |reserved_bytes| as uint64;
+        assert len_dst == |reserved_bytes|;
+
+        calc {
+          val_dst.b;
+          rest_dst[0..len_dst_uint64];
+          rest_dst[0..len_dst];
+          rest1[8..][0..len_dst];
+            { lemma_SeqOffset(rest1, rest1[8..], 8, 0, len_dst); }
+          rest1[8 .. 8 + len_dst];
+          data[16..][8 .. 8 + len_dst];
+            { lemma_SeqOffset(data, data[16..], 16, 8, 8 + len_dst); }
+          data[24 .. 24 + len_dst];
+            { lemma_ParseMarshallReplyHelper(bytes, reply, reserved_bytes); }
+          reserved_bytes;
+        }
+
+        assert rest2[..8] == data[24 + len_dst .. 32 + len_dst] == [0, 0, 0, 0, 0, 0, 0, 2];
+        assert mCaseId == 2;
+        
+        var keyVal, optValueVal, rest4 := lemma_ParseValCorrectTuple2(rest3, mCaseVal, g.cases[msgCaseId].t[2].cases[mCaseId]);
+        var valCaseId, valCaseVal, rest5 := lemma_ParseValCorrectVCase(rest4, optValueVal, OptionalValue_grammar());
+
+        // Prove that the key is handled correctly
+        var key, rest_key := lemma_ParseValCorrectVUint64(rest3, keyVal, GUint64);
+        calc {
+            msg.m.k_reply;
+            key;
+            parse_Uint64(rest3).0.v.u;
+            parse_Uint64(MarshallSHTKey(reply.k)).0.v.u;
+            SeqByteToUint64(MarshallSHTKey(reply.k));
+            SeqByteToUint64(Uint64ToBytes(reply.k));
+            SeqByteToUint64(Uint64ToSeqByte(reply.k));
+            SeqByteToUint64(BEUintToSeqByte(reply.k as int, 8));
+                { lemma_BEByteSeqToInt_BEUintToSeqByte_invertability(); }
+            reply.k;
+        }
+        assume rest4 == rest3[8..] == data[40 + len_dst..];
+
+        calc {
+          rest4[..8];
+          rest4[0..8];
+            { lemma_SeqOffset(rest3, rest4, 8, 0, 8); }
+          rest3[8..16];
+            { lemma_SeqOffset(rest2, rest3, 8, 8, 16); }
+          rest2[16..24];
+            { lemma_SeqOffset(rest1, rest2, 8 + len_dst, 16, 24); }
+          rest1[24+len_dst..32+len_dst];
+            { lemma_SeqOffset(rest0, rest1, 8, 24 + len_dst, 32 + len_dst); }
+          rest0[32+len_dst..40+len_dst];
+            { lemma_SeqOffset(data, rest0, 8, 32 + len_dst, 40 + len_dst); }
+          data[40+len_dst..48+len_dst];
+        }
+
+        // Handle the two subcases of OptionalValue
+        if reply.ov.ValuePresent? {
+            assert rest4[..8] == [ 0, 0, 0, 0, 0, 0, 0, 0];
+
+            assert rest5 == parse_Uint64(rest4).1;
+            assert |rest5| == |rest4| - 8;
+            assert |rest5| < 0x1_0000_0000_0000_0000;
+
+            var byteLen, bytesVal, rest6 := lemma_ParseValCorrectVByteArray(rest5, valCaseVal, GByteArray);
+            calc {
+                byteLen;
+                parse_Uint64(rest5).0.v.u;
+                SeqByteToUint64(rest5[..8]);
+                SeqByteToUint64(Uint64ToBytes(|reply.ov.v| as uint64));
+                SeqByteToUint64(Uint64ToSeqByte(|reply.ov.v| as uint64));
+                SeqByteToUint64(BEUintToSeqByte(|reply.ov.v| as uint64 as int, 8));
+                    { lemma_BEByteSeqToInt_BEUintToSeqByte_invertability(); }
+                |reply.ov.v| as uint64;
+            }
+            assert |bytesVal.b| == |msg.m.v.v|;
+            assert bytesVal.b == msg.m.v.v;
+
+            assert |bytesVal.b| == |reply.ov.v|;
+            assert bytesVal.b == reply.ov.v;
+
+            assert msg.m.v == reply.ov;
+        } else {
+            assert rest4[..8] == [ 0, 0, 0, 0, 0, 0, 0, 1];
         }
     }
 }

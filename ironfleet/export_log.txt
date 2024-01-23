@@ -1,0 +1,294 @@
+src/Dafny/Distributed/Common/Collections/Maps.i.dfy
+
+Dafny program verifier finished with 10 verified, 0 errors
+src/Dafny/Distributed/Common/Collections/Maps2.i.dfy
+
+Dafny program verifier finished with 11 verified, 0 errors
+src/Dafny/Distributed/Common/Collections/Maps2.s.dfy
+
+Dafny program verifier finished with 1 verified, 0 errors
+src/Dafny/Distributed/Common/Collections/Seqs.s.dfy
+
+Dafny program verifier finished with 2 verified, 0 errors
+src/Dafny/Distributed/Common/Collections/Sets.i.dfy
+
+Dafny program verifier finished with 25 verified, 0 errors
+src/Dafny/Distributed/Common/Collections/Seqs.i.dfy
+
+Dafny program verifier finished with 10 verified, 0 errors
+src/Dafny/Distributed/Common/Framework/AbstractService.s.dfy
+
+Dafny program verifier finished with 0 verified, 0 errors
+src/Dafny/Distributed/Common/Framework/DistributedSystem.s.dfy
+src/Dafny/Distributed/Common/Framework/DistributedSystem.s.dfy(1,0): Warning: File contains no code (ID: p_file_has_no_code)
+
+The indicated file has no code. This can be because the file is empty, because some parse error
+left the top-level module with no well-formed declarations, or because a unclosed comment
+has commented-out the whole file.
+
+Dafny program verifier finished with 0 verified, 0 errors
+src/Dafny/Distributed/Common/Framework/Environment.s.dfy
+
+Dafny program verifier finished with 4 verified, 0 errors
+src/Dafny/Distributed/Common/Framework/Host.s.dfy
+src/Dafny/Distributed/Common/Framework/Host.s.dfy(1,0): Warning: File contains no code (ID: p_file_has_no_code)
+
+The indicated file has no code. This can be because the file is empty, because some parse error
+left the top-level module with no well-formed declarations, or because a unclosed comment
+has commented-out the whole file.
+
+Dafny program verifier finished with 0 verified, 0 errors
+src/Dafny/Distributed/Common/Framework/Main.s.dfy
+src/Dafny/Distributed/Common/Framework/Main.s.dfy(1,0): Warning: File contains no code (ID: p_file_has_no_code)
+
+The indicated file has no code. This can be because the file is empty, because some parse error
+left the top-level module with no well-formed declarations, or because a unclosed comment
+has commented-out the whole file.
+
+Dafny program verifier finished with 0 verified, 0 errors
+src/Dafny/Distributed/Common/Logic/Option.i.dfy
+
+Dafny program verifier finished with 0 verified, 0 errors
+src/Dafny/Distributed/Common/Logic/Temporal/Temporal.s.dfy
+
+Dafny program verifier finished with 8 verified, 0 errors
+src/Dafny/Distributed/Common/Native/Io.s.dfy
+src/Dafny/Distributed/Common/Native/Io.s.dfy(282,45): Warning: unusual indentation in right-hand operand of ==> (which ends at line 285, column 41); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+
+Dafny program verifier finished with 16 verified, 0 errors
+src/Dafny/Distributed/Common/Native/NativeTypes.i.dfy
+
+Dafny program verifier finished with 3 verified, 0 errors
+src/Dafny/Distributed/Common/Native/NativeTypes.s.dfy
+
+Dafny program verifier finished with 12 verified, 0 errors
+src/Dafny/Distributed/Impl/Common/CmdLineParser.i.dfy
+
+Dafny program verifier finished with 5 verified, 0 errors
+src/Dafny/Distributed/Impl/Common/GenericMarshalling.i.dfy
+
+Dafny program verifier finished with 93 verified, 0 errors
+src/Dafny/Distributed/Impl/Common/GenericRefinement.i.dfy
+src/Dafny/Distributed/Impl/Common/GenericRefinement.i.dfy(81,6): Verification of 'GenericRefinement_i.Lemma_AbstractifyMap_append (correctness)' timed out after 60 seconds
+src/Dafny/Distributed/Impl/Common/GenericRefinement.i.dfy(140,6): Verification of 'GenericRefinement_i.Lemma_AbstractifyMap_remove (correctness)' timed out after 60 seconds
+src/Dafny/Distributed/Impl/Common/GenericRefinement.i.dfy(185,6): Verification of 'GenericRefinement_i.lemma_AbstractifyMap_properties (correctness)' timed out after 60 seconds
+
+Dafny program verifier finished with 11 verified, 0 errors, 3 time outs
+src/Dafny/Distributed/Impl/Common/MarshallInt.i.dfy
+
+Dafny program verifier finished with 2 verified, 0 errors
+src/Dafny/Distributed/Impl/Common/NetClient.i.dfy
+
+Dafny program verifier finished with 6 verified, 0 errors
+src/Dafny/Distributed/Impl/Common/NodeIdentity.i.dfy
+
+Dafny program verifier finished with 18 verified, 0 errors
+src/Dafny/Distributed/Impl/Common/SeqIsUnique.i.dfy
+
+Dafny program verifier finished with 17 verified, 0 errors
+src/Dafny/Distributed/Impl/Common/SeqIsUniqueDef.i.dfy
+
+Dafny program verifier finished with 1 verified, 0 errors
+src/Dafny/Distributed/Impl/Common/Util.i.dfy
+
+Dafny program verifier finished with 25 verified, 0 errors
+src/Dafny/Distributed/Impl/LiveSHT/CmdLineParser.i.dfy
+src/Dafny/Distributed/Impl/LiveSHT/CmdLineParser.i.dfy(82,13): Warning: unusual indentation in right-hand operand of ==> (which ends at line 85, column 48); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+
+Dafny program verifier finished with 5 verified, 0 errors
+src/Dafny/Distributed/Impl/LiveSHT/Host.i.dfy
+
+Dafny program verifier finished with 15 verified, 0 errors
+src/Dafny/Distributed/Impl/LiveSHT/NetSHT.i.dfy
+src/Dafny/Distributed/Impl/LiveSHT/NetSHT.i.dfy(88,24): Warning: unusual indentation in right-hand operand of ==> (which ends at line 90, column 87); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Impl/LiveSHT/NetSHT.i.dfy(93,25): Warning: unusual indentation in right-hand operand of ==> (which ends at line 100, column 40); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+
+Dafny program verifier finished with 13 verified, 0 errors
+src/Dafny/Distributed/Impl/LiveSHT/SchedulerImpl.i.dfy
+src/Dafny/Distributed/Impl/LiveSHT/SchedulerImpl.i.dfy(109,17): Warning: unusual indentation in right-hand operand of ==> (which ends at line 113, column 34); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Impl/LiveSHT/SchedulerImpl.i.dfy(306,17): Warning: unusual indentation in body of forall (which ends at line 307, column 110); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Impl/LiveSHT/SchedulerImpl.i.dfy(309,17): Warning: unusual indentation in body of forall (which ends at line 310, column 110); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+
+Dafny program verifier finished with 39 verified, 0 errors
+src/Dafny/Distributed/Impl/LiveSHT/SchedulerModel.i.dfy
+
+Dafny program verifier finished with 7 verified, 0 errors
+src/Dafny/Distributed/Impl/LiveSHT/Unsendable.i.dfy
+
+Dafny program verifier finished with 2 verified, 0 errors
+src/Dafny/Distributed/Impl/SHT/AppInterface.i.dfy
+
+Dafny program verifier finished with 2 verified, 0 errors
+src/Dafny/Distributed/Impl/SHT/AppInterfaceConcrete.i.dfy
+
+Dafny program verifier finished with 11 verified, 0 errors
+src/Dafny/Distributed/Impl/SHT/CMessage.i.dfy
+
+Dafny program verifier finished with 8 verified, 0 errors
+src/Dafny/Distributed/Impl/SHT/ConstantsState.i.dfy
+
+Dafny program verifier finished with 1 verified, 0 errors
+src/Dafny/Distributed/Impl/SHT/DelegationLookup.i.dfy
+
+Dafny program verifier finished with 10 verified, 0 errors
+src/Dafny/Distributed/Impl/SHT/Delegations.i.dfy
+src/Dafny/Distributed/Impl/SHT/Delegations.i.dfy(217,12): Warning: unusual indentation in body of forall (which ends at line 220, column 17); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+
+Dafny program verifier finished with 42 verified, 0 errors
+src/Dafny/Distributed/Impl/SHT/HostModel.i.dfy
+
+Dafny program verifier finished with 22 verified, 0 errors
+src/Dafny/Distributed/Impl/SHT/HostState.i.dfy
+src/Dafny/Distributed/Impl/SHT/HostState.i.dfy(66,34): Warning: unusual indentation in right-hand operand of ==> (which ends at line 70, column 73); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+
+Dafny program verifier finished with 12 verified, 0 errors
+src/Dafny/Distributed/Impl/SHT/PacketParsing.i.dfy
+
+Dafny program verifier finished with 70 verified, 0 errors
+src/Dafny/Distributed/Impl/SHT/Parameters.i.dfy
+
+Dafny program verifier finished with 3 verified, 0 errors
+src/Dafny/Distributed/Impl/SHT/SHTConcreteConfiguration.i.dfy
+
+Dafny program verifier finished with 7 verified, 0 errors
+src/Dafny/Distributed/Impl/SHT/SingleDeliveryModel.i.dfy
+
+Dafny program verifier finished with 35 verified, 0 errors
+src/Dafny/Distributed/Impl/SHT/SingleDeliveryState.i.dfy
+
+Dafny program verifier finished with 12 verified, 0 errors
+src/Dafny/Distributed/Protocol/Common/NodeIdentity.i.dfy
+
+Dafny program verifier finished with 0 verified, 0 errors
+src/Dafny/Distributed/Protocol/Common/NodeIdentity.s.dfy
+
+Dafny program verifier finished with 0 verified, 0 errors
+src/Dafny/Distributed/Protocol/LiveSHT/RefinementProof/Environment.i.dfy
+
+Dafny program verifier finished with 1 verified, 0 errors
+src/Dafny/Distributed/Protocol/LiveSHT/RefinementProof/EnvironmentLemmas.i.dfy
+
+Dafny program verifier finished with 9 verified, 0 errors
+src/Dafny/Distributed/Protocol/LiveSHT/RefinementProof/EnvironmentRefinement.i.dfy
+
+Dafny program verifier finished with 2 verified, 0 errors
+src/Dafny/Distributed/Protocol/LiveSHT/RefinementProof/SHT.i.dfy
+
+Dafny program verifier finished with 3 verified, 0 errors
+src/Dafny/Distributed/Protocol/LiveSHT/RefinementProof/SHTLemmas.i.dfy
+
+Dafny program verifier finished with 17 verified, 0 errors
+src/Dafny/Distributed/Protocol/LiveSHT/RefinementProof/SHTRefinement.i.dfy
+
+Dafny program verifier finished with 5 verified, 0 errors
+src/Dafny/Distributed/Protocol/LiveSHT/RefinementProof/SchedulerLemmas.i.dfy
+
+Dafny program verifier finished with 4 verified, 0 errors
+src/Dafny/Distributed/Protocol/LiveSHT/RefinementProof/SchedulerRefinement.i.dfy
+
+Dafny program verifier finished with 3 verified, 0 errors
+src/Dafny/Distributed/Protocol/LiveSHT/Scheduler.i.dfy
+
+Dafny program verifier finished with 6 verified, 0 errors
+src/Dafny/Distributed/Protocol/SHT/Configuration.i.dfy
+
+Dafny program verifier finished with 1 verified, 0 errors
+src/Dafny/Distributed/Protocol/SHT/Delegations.i.dfy
+
+Dafny program verifier finished with 7 verified, 0 errors
+src/Dafny/Distributed/Protocol/SHT/Host.i.dfy
+src/Dafny/Distributed/Protocol/SHT/Host.i.dfy(102,13): Warning: unusual indentation in else branch of if-then-else (which ends at line 108, column 51); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/Host.i.dfy(137,11): Warning: unusual indentation in else branch of if-then-else (which ends at line 145, column 41); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/Host.i.dfy(136,4): Warning: unusual indentation in else branch of if-then-else (which ends at line 152, column 20); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/Host.i.dfy(170,8): Warning: unusual indentation in else branch of if-then-else (which ends at line 177, column 35); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/Host.i.dfy(196,7): Warning: unusual indentation in else branch of if-then-else (which ends at line 203, column 23); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+
+Dafny program verifier finished with 17 verified, 0 errors
+src/Dafny/Distributed/Protocol/SHT/Keys.i.dfy
+
+Dafny program verifier finished with 8 verified, 0 errors
+src/Dafny/Distributed/Protocol/SHT/Message.i.dfy
+
+Dafny program verifier finished with 0 verified, 0 errors
+src/Dafny/Distributed/Protocol/SHT/Network.i.dfy
+
+Dafny program verifier finished with 0 verified, 0 errors
+src/Dafny/Distributed/Protocol/SHT/Parameters.i.dfy
+
+Dafny program verifier finished with 0 verified, 0 errors
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvDefs.i.dfy
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvDefs.i.dfy(78,4): Warning: unusual indentation in body of forall (which ends at line 83, column 52); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+
+Dafny program verifier finished with 19 verified, 0 errors
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(93,4): Warning: unusual indentation in body of forall (which ends at line 98, column 17); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(155,4): Warning: unusual indentation in body of forall (which ends at line 157, column 73); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(523,8): Warning: unusual indentation in body of forall (which ends at line 525, column 84); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(797,13): Warning: unusual indentation in body of forall (which ends at line 798, column 60); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(837,14): Warning: unusual indentation in right-hand operand of ==> (which ends at line 839, column 82); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(842,13): Warning: unusual indentation in body of forall (which ends at line 843, column 55); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(893,41): Warning: unusual indentation in right-hand operand of ==> (which ends at line 895, column 63); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(984,51): Warning: unusual indentation in left-hand operand of ==> (which starts at line 983, column 27); do you perhaps need parentheses? (ID: rw_unusual_indentation_start)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(1031,13): Warning: unusual indentation in body of forall (which ends at line 1032, column 55); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(1039,4): Warning: unusual indentation in body of forall (which ends at line 1042, column 75); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(1303,11): Warning: unusual indentation in body of forall (which ends at line 1306, column 17); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(1344,4): Warning: unusual indentation in body of forall (which ends at line 1347, column 75); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(1472,4): Warning: unusual indentation in body of forall (which ends at line 1475, column 75); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(1621,4): Warning: unusual indentation in body of forall (which ends at line 1624, column 75); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/InvProof.i.dfy(1790,4): Warning: unusual indentation in body of forall (which ends at line 1793, column 75); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+
+Dafny program verifier finished with 98 verified, 0 errors
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/Refinement.i.dfy
+
+Dafny program verifier finished with 3 verified, 0 errors
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(294,53): Warning: unusual indentation in right-hand operand of ==> (which ends at line 296, column 52); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(319,23): Warning: unusual indentation in body of forall (which ends at line 322, column 29); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(348,53): Warning: unusual indentation in right-hand operand of ==> (which ends at line 350, column 52); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(1195,4): Warning: unusual indentation in body of forall (which ends at line 1199, column 69); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(1412,4): Warning: unusual indentation in body of forall (which ends at line 1414, column 55); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(1462,6): Verification of 'SHT__RefinementProof_i.Next_Process_Message_Refines (correctness)' timed out after 60 seconds
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(1647,6): Verification of 'SHT__RefinementProof_i.ReceivePacketRefines (correctness)' timed out after 60 seconds
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(1885,6): Verification of 'SHT__RefinementProof_i.NextExternalRefines (correctness)' timed out after 60 seconds
+
+Dafny program verifier finished with 72 verified, 0 errors, 3 time outs
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/SHT.i.dfy
+
+Dafny program verifier finished with 3 verified, 0 errors
+src/Dafny/Distributed/Protocol/SHT/SingleDelivery.i.dfy
+
+Dafny program verifier finished with 16 verified, 0 errors
+src/Dafny/Distributed/Protocol/SHT/SingleMessage.i.dfy
+
+Dafny program verifier finished with 0 verified, 0 errors
+src/Dafny/Distributed/Services/SHT/AbstractService.s.dfy
+src/Dafny/Distributed/Services/SHT/AbstractService.s.dfy(116,20): Warning: unusual indentation in left-hand operand of ==> (which starts at line 112, column 21); do you perhaps need parentheses? (ID: rw_unusual_indentation_start)
+
+Dafny program verifier finished with 5 verified, 0 errors
+src/Dafny/Distributed/Services/SHT/AppInterface.i.dfy
+
+Dafny program verifier finished with 3 verified, 0 errors
+src/Dafny/Distributed/Services/SHT/AppInterface.s.dfy
+
+Dafny program verifier finished with 1 verified, 0 errors
+src/Dafny/Distributed/Services/SHT/Bytes.s.dfy
+
+Dafny program verifier finished with 1 verified, 0 errors
+src/Dafny/Distributed/Services/SHT/HT.s.dfy
+
+Dafny program verifier finished with 2 verified, 0 errors
+src/Dafny/Distributed/Services/SHT/Main.i.dfy
+src/Dafny/Distributed/Services/SHT/Main.i.dfy(421,17): Warning: unusual indentation in body of let-expression (which ends at line 425, column 109); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Services/SHT/Main.i.dfy(449,17): Warning: unusual indentation in body of let-expression (which ends at line 453, column 148); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Services/SHT/Main.i.dfy(1131,42): Warning: unusual indentation in right-hand operand of ==> (which ends at line 1132, column 80); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
+src/Dafny/Distributed/Services/SHT/Main.i.dfy(858,10): Verification of 'Main_i.lemma_IgnoringCertainMessageTypesFromNonServerIsLSchedulerNext (correctness)' timed out after 60 seconds
+src/Dafny/Distributed/Services/SHT/Main.i.dfy(1257,10): Verification of 'Main_i.RefinementToServiceStateSequence (correctness)' timed out after 60 seconds
+src/Dafny/Distributed/Services/SHT/Main.i.dfy(1592,7): Verification of 'Main_i.IronfleetMain (correctness)' timed out after 60 seconds
+
+Dafny program verifier finished with 88 verified, 0 errors, 3 time outs
+src/Dafny/Distributed/Services/SHT/Marshall.i.dfy
+
+Dafny program verifier finished with 20 verified, 0 errors
+src/Dafny/Distributed/Services/SHT/SHTDistributedSystem.i.dfy
+
+Dafny program verifier finished with 4 verified, 0 errors

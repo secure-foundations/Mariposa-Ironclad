@@ -1253,7 +1253,8 @@ import opened Collections__Seqs_s
         }
     }
 
-    lemma {:timeLimitMultiplier 20} RefinementToServiceStateSequence(config:SHTConfiguration, db:seq<SHT_State>) returns (sb:seq<ServiceState>)
+    // lemma {:timeLimitMultiplier 20} RefinementToServiceStateSequence(config:SHTConfiguration, db:seq<SHT_State>) returns (sb:seq<ServiceState>)
+    lemma RefinementToServiceStateSequence(config:SHTConfiguration, db:seq<SHT_State>) returns (sb:seq<ServiceState>)
         requires |db| > 0;
         requires SHT_Init(config, db[0]);
         requires forall i {:trigger SHT_Next(db[i], db[i+1])} :: 0 <= i < |db| - 1 ==> db[i] == db[i+1] || SHT_Next(db[i], db[i+1]);
@@ -1304,7 +1305,8 @@ import opened Collections__Seqs_s
     {
     }
 
-    lemma {:timeLimitMultiplier 3} RefinementToSHTSequence(config:SHTConfiguration, db:seq<LSHT_State>) returns (sb:seq<SHT_State>)
+    // lemma {:timeLimitMultiplier 3} RefinementToSHTSequence(config:SHTConfiguration, db:seq<LSHT_State>) returns (sb:seq<SHT_State>)
+    lemma RefinementToSHTSequence(config:SHTConfiguration, db:seq<LSHT_State>) returns (sb:seq<SHT_State>)
         requires |db| > 0;
         requires LSHT_Init(config, db[0]);
         requires forall i {:trigger LSHT_Next(db[i], db[i+1])} :: 0 <= i < |db| - 1 ==> LSHT_Next(db[i], db[i+1]);

@@ -285,7 +285,8 @@ lemma ThereCanBeOnlyOneInFlightPacket(s:SHT_State, s':SHT_State, k:Key, pkt:Pack
     PacketClaimsKey_forces_FindHashTable(s', pkt, k);
 }
 
-lemma {:timeLimitMultiplier 2} NondelegatingReadonlyStepPreservesRefinement_guts(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>)
+// lemma {:timeLimitMultiplier 2} NondelegatingReadonlyStepPreservesRefinement_guts(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>)
+lemma NondelegatingReadonlyStepPreservesRefinement_guts(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>)
     requires HiddenInv(s) && InvBasics(s);
     requires HiddenInv(s') && InvBasics(s');
     requires SHT_Next(s, s');
@@ -595,7 +596,8 @@ lemma SetPreservesRefinement_ExpandFindHashTable(s:SHT_State, s':SHT_State, id:N
 }
 
 
-lemma {:timeLimitMultiplier 2} SetPreservesRefinement_HostClaims(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>, rpkt:Packet, ko:Key, sm:SingleMessage<Message>, m:Message)
+// lemma {:timeLimitMultiplier 2} SetPreservesRefinement_HostClaims(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>, rpkt:Packet, ko:Key, sm:SingleMessage<Message>, m:Message)
+lemma SetPreservesRefinement_HostClaims(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>, rpkt:Packet, ko:Key, sm:SingleMessage<Message>, m:Message)
     requires HiddenInv(s) && InvBasics(s);
     requires HiddenInv(s') && InvBasics(s');
     requires SHT_Next(s, s');
@@ -655,7 +657,9 @@ lemma {:timeLimitMultiplier 2} SetPreservesRefinement_HostClaims(s:SHT_State, s'
         reveal_EachKeyClaimedInExactlyOnePlace();
         assert NoInFlightPacketClaimsKey(s', ko);   // OBSERVE trigger
     }
-    forall () ensures TheHostThatClaimsKey(s, ko)==kid;
+    forall () 
+    ensures exists id :: id in AllHostIdentities(s) && HostClaimsKey(s.hosts[id], ko);
+    ensures TheHostThatClaimsKey(s, ko)==kid;
     {
         reveal_HiddenInv();
         reveal_EachKeyClaimedInExactlyOnePlace();
@@ -1454,7 +1458,8 @@ lemma NextShardPreservesRefinement_main(s:SHT_State, s':SHT_State, id:NodeIdenti
     assert InvRefinementNormalized(s');
 }
 
-lemma {:timeLimitMultiplier 12} Next_Process_Message_Refines(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>)
+// lemma {:timeLimitMultiplier 12} Next_Process_Message_Refines(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>)
+lemma Next_Process_Message_Refines(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>)
     requires Inv(s);
     requires MapComplete(s');
     requires SHT_Next(s, s');
@@ -1638,7 +1643,8 @@ lemma ReceiveBoringPacketRefines(s:SHT_State, s':SHT_State, id:NodeIdentity, rec
 }
 */
 
-lemma {:timeLimitMultiplier 24} ReceivePacketRefines(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, rpkt:Packet, out:set<Packet>, ack:Packet) 
+// lemma {:timeLimitMultiplier 24} ReceivePacketRefines(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, rpkt:Packet, out:set<Packet>, ack:Packet) 
+lemma ReceivePacketRefines(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, rpkt:Packet, out:set<Packet>, ack:Packet) 
     requires Inv(s);
     requires MapComplete(s');
     requires SHT_Next(s, s');
@@ -1844,7 +1850,8 @@ lemma RetransmitRefines(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Pac
     assert HashtableStutter(R.ht, R'.ht);
 }
 
-lemma {:timeLimitMultiplier 2} NextPredRefines(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>)
+// lemma {:timeLimitMultiplier 2} NextPredRefines(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>)
+lemma NextPredRefines(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>)
     requires Inv(s);
     requires MapComplete(s');
     requires SHT_Next(s, s');
@@ -1874,7 +1881,8 @@ lemma {:timeLimitMultiplier 2} NextPredRefines(s:SHT_State, s':SHT_State, id:Nod
     }
 }
 
-lemma {:timeLimitMultiplier 8} NextExternalRefines(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>)
+// lemma {:timeLimitMultiplier 8} NextExternalRefines(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>)
+lemma NextExternalRefines(s:SHT_State, s':SHT_State, id:NodeIdentity, recv:set<Packet>, out:set<Packet>)
     requires Inv(s);
     requires MapComplete(s');
     requires SHT_Next(s, s');
