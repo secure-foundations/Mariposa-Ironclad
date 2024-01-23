@@ -66,8 +66,13 @@ src/Dafny/Distributed/Impl/Common/CmdLineParser.i.dfy
 
 Dafny program verifier finished with 5 verified, 0 errors
 src/Dafny/Distributed/Impl/Common/GenericMarshalling.i.dfy
+src/Dafny/Distributed/Impl/Common/GenericMarshalling.i.dfy(1076,4): Error: a postcondition could not be proved on this return path
+src/Dafny/Distributed/Impl/Common/GenericMarshalling.i.dfy(1062,72): Related location: this is the postcondition that could not be proved
+src/Dafny/Distributed/Impl/Common/GenericMarshalling.i.dfy(1087,30): Error: assertion might not hold
+src/Dafny/Distributed/Impl/Common/GenericMarshalling.i.dfy(1715,17): Error: assertion might not hold
+src/Dafny/Distributed/Impl/Common/GenericMarshalling.i.dfy(1766,20): Error: assertion might not hold
 
-Dafny program verifier finished with 93 verified, 0 errors
+Dafny program verifier finished with 90 verified, 4 errors
 src/Dafny/Distributed/Impl/Common/GenericRefinement.i.dfy
 src/Dafny/Distributed/Impl/Common/GenericRefinement.i.dfy(81,6): Verification of 'GenericRefinement_i.Lemma_AbstractifyMap_append (correctness)' timed out after 60 seconds
 src/Dafny/Distributed/Impl/Common/GenericRefinement.i.dfy(140,6): Verification of 'GenericRefinement_i.Lemma_AbstractifyMap_remove (correctness)' timed out after 60 seconds
@@ -247,11 +252,10 @@ src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(319,23)
 src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(348,53): Warning: unusual indentation in right-hand operand of ==> (which ends at line 350, column 52); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
 src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(1195,4): Warning: unusual indentation in body of forall (which ends at line 1199, column 69); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
 src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(1412,4): Warning: unusual indentation in body of forall (which ends at line 1414, column 55); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
-src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(1462,6): Verification of 'SHT__RefinementProof_i.Next_Process_Message_Refines (correctness)' timed out after 60 seconds
-src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(1647,6): Verification of 'SHT__RefinementProof_i.ReceivePacketRefines (correctness)' timed out after 60 seconds
-src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(1885,6): Verification of 'SHT__RefinementProof_i.NextExternalRefines (correctness)' timed out after 60 seconds
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(163,6): Verification of 'SHT__RefinementProof_i.LookupInRefinement (correctness)' timed out after 60 seconds
+src/Dafny/Distributed/Protocol/SHT/RefinementProof/RefinementProof.i.dfy(1678,46): Error: element might not be in domain
 
-Dafny program verifier finished with 72 verified, 0 errors, 3 time outs
+Dafny program verifier finished with 73 verified, 1 error, 1 time out
 src/Dafny/Distributed/Protocol/SHT/RefinementProof/SHT.i.dfy
 
 Dafny program verifier finished with 3 verified, 0 errors
@@ -281,11 +285,9 @@ src/Dafny/Distributed/Services/SHT/Main.i.dfy
 src/Dafny/Distributed/Services/SHT/Main.i.dfy(421,17): Warning: unusual indentation in body of let-expression (which ends at line 425, column 109); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
 src/Dafny/Distributed/Services/SHT/Main.i.dfy(449,17): Warning: unusual indentation in body of let-expression (which ends at line 453, column 148); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
 src/Dafny/Distributed/Services/SHT/Main.i.dfy(1131,42): Warning: unusual indentation in right-hand operand of ==> (which ends at line 1132, column 80); do you perhaps need parentheses? (ID: rw_unusual_indentation_end)
-src/Dafny/Distributed/Services/SHT/Main.i.dfy(858,10): Verification of 'Main_i.lemma_IgnoringCertainMessageTypesFromNonServerIsLSchedulerNext (correctness)' timed out after 60 seconds
-src/Dafny/Distributed/Services/SHT/Main.i.dfy(1257,10): Verification of 'Main_i.RefinementToServiceStateSequence (correctness)' timed out after 60 seconds
-src/Dafny/Distributed/Services/SHT/Main.i.dfy(1592,7): Verification of 'Main_i.IronfleetMain (correctness)' timed out after 60 seconds
+src/Dafny/Distributed/Services/SHT/Main.i.dfy(1413,35): Verification of 'Main_i.RefinementProofForFixedBehavior (correctness)' timed out after 240 seconds
 
-Dafny program verifier finished with 88 verified, 0 errors, 3 time outs
+Dafny program verifier finished with 90 verified, 0 errors, 1 time out
 src/Dafny/Distributed/Services/SHT/Marshall.i.dfy
 
 Dafny program verifier finished with 20 verified, 0 errors

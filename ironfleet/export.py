@@ -95,17 +95,11 @@ import glob, os
 
 # /vcsCores:4 
 
-smt2_from_dfy = "dotnet /home/yizhou7/dafny/Dafny.dll /compile:0 /timeLimit:60 /functionSyntax:3 /deprecation:0 /proverLog:original/@FILE@.@PROC@.smt2 "
+# bpl_from_dfy = "dotnet /home/yizhou7/dafny/Dafny.dll /compile:0 /functionSyntax:3 /deprecation:0 /noVerify "
 
-for i in range(len(cmds)):
-    print("echo " + "\"" + cmds[i].split(" ")[-1] + "\"")
-    print(smt2_from_dfy + cmds[i] + " /vcsCores:6 ")
+# smt2_from_bpl_prune = "dotnet boogie /prune /typeEncoding:a /emitDebugInformation:0 /proverLog:original/@FILE@.@PROC@.smt2 /timeLimit:1 "
 
-bpl_from_dfy = "dotnet /home/yizhou7/dafny/Dafny.dll /compile:0 /functionSyntax:3 /deprecation:0 /noVerify "
-
-smt2_from_bpl_prune = "dotnet boogie /prune /typeEncoding:a /emitDebugInformation:0 /proverLog:original/@FILE@.@PROC@.smt2 /timeLimit:1 "
-
-smt2_from_bpl_bloat = "dotnet boogie /typeEncoding:a /emitDebugInformation:0 /proverLog:bloated/@FILE@.@PROC@.smt2 /timeLimit:1 "
+# smt2_from_bpl_bloat = "dotnet boogie /typeEncoding:a /emitDebugInformation:0 /proverLog:bloated/@FILE@.@PROC@.smt2 /timeLimit:1 "
 
 # for cmd in cmds:
 #     file = cmd.split(" ")[-1]
@@ -113,10 +107,6 @@ smt2_from_bpl_bloat = "dotnet boogie /typeEncoding:a /emitDebugInformation:0 /pr
 #     print(bpl_from_dfy + " " + cmd + f" /print:boogies/{file}")
 
 # print("echo \"run with parallel in bash\"")
-
-# for bpl_file in glob.glob("boogies/*.bpl"):
-#     print(smt2_from_bpl_prune + " " + bpl_file)
-#     # print(smt2_from_bpl_bloat + " " + bpl_file)
 
 # original = set([os.path.basename(f) for f in glob.glob("original/*.smt2")])
 # bloated = set([os.path.basename(f) for f in glob.glob("bloated/*.smt2")])
@@ -129,3 +119,112 @@ smt2_from_bpl_bloat = "dotnet boogie /typeEncoding:a /emitDebugInformation:0 /pr
 #             break
 #     print(file)
 #     open(file, "w").writelines(new_content)
+
+def gen_bloat_script():
+    smt2_from_bloat_dfy = "dotnet /home/yizhou7/dafny/BloatBinaries/Dafny.dll /compile:0 /timeLimit:60 /functionSyntax:3 /deprecation:0 /proverLog:bt/@FILE@.@PROC@.smt2 "
+    f = open("bloat.sh", "w")
+    f.write("#!/bin/bash\n")
+
+    for i in range(len(cmds)):
+        f.write("echo " + "\"" + cmds[i].split(" ")[-1] + "\"" + "\n")
+        f.write(smt2_from_bloat_dfy + cmds[i] + " /vcsCores:6 \n")
+    f.close()
+    
+    print("./bloat.sh | tee bloat.log.txt")
+
+def gen_dfy_original_script():
+    smt2_from_dfy = "dotnet /home/yizhou7/dafny/Binaries/Dafny.dll /compile:0 /timeLimit:60 /functionSyntax:3 /deprecation:0 /proverLog:or/@FILE@.@PROC@.smt2 "
+    f = open("original.sh", "w")
+    f.write("#!/bin/bash\n")
+
+    for i in range(len(cmds)):
+        f.write("echo " + "\"" + cmds[i].split(" ")[-1] + "\"" + "\n")
+        f.write(smt2_from_dfy + cmds[i] + " /vcsCores:6 \n")
+    f.close()
+
+    print("./original.sh | tee original.log.txt")
+
+def get_files(subdir):
+    files = set()
+    for smt2 in glob.glob(subdir + "/*.smt2"):
+        files.add(os.path.basename(smt2))
+    return files
+
+def read_log(log_file):
+    import re
+    verified = re.compile("([0-9]+) verified")
+    errors = re.compile("([0-9]+) error")
+    timeouts = re.compile("([0-9]+) time out")
+    counts = {"verified": 0, "errors": 0, "timeouts": 0}
+    for line in open(log_file).readlines():
+        v_match = verified.search(line)
+        e_match = errors.search(line)
+        t_match = timeouts.search(line)
+        if v_match:
+            # print(v_match.group(1), end=" ")
+            counts["verified"] += int(v_match.group(1))
+        if e_match:
+            # print(e_match.group(1), end=" ")
+            if int(e_match.group(1)) > 0:
+                print(line)
+            counts ["errors"] +=  int(e_match.group(1))
+        if t_match:
+            if int(e_match.group(1)) > 0:
+                print(line)
+            # print(t_match.group(1), end=" ")
+            counts["timeouts"] += int(t_match.group(1))
+    print(counts)
+
+# read_log("original.log.txt")
+# read_log("bloat.log.txt")
+
+def match_files():
+    org = get_files("or")
+    blt = get_files("bt") 
+
+    bloated_ = blt - org
+    original_ = org - blt
+
+    # import editdistance
+
+    # new_names = set()
+    # count = 0
+    # not_matched = set()
+    # for b in bloated_:
+    #     scores = []
+    #     for o in original_:
+    #         scores.append((o, editdistance.eval(b, o)))
+    #     min_score = min(scores, key=lambda x: x[1])
+    #     # if max is unique then rename
+    #     if len([s for s in scores if s[1] == min_score[1]]) == 1:
+    #         print(b)
+    #         print(min_score[0])
+    #         print("")
+    #         new_names.add(min_score[0])
+    #         os.rename("bloated/" + b, "bloated/" + min_score[0])
+    #         count += 1
+    #     else:
+    #         not_matched.add(b)
+
+    # print("")
+    # for j in not_matched:
+    #     print(j)
+    # print("")
+    # for k in original_ - new_names:
+    #     print(k)
+
+def process_smt2_basic():
+    subdir = "or"
+    for smt2 in glob.glob(subdir + "/*.smt2"):
+        new_content = []
+        for line in open(smt2).readlines():
+            new_content.append(line)
+            if "(check-sat)" in line:
+                break
+        open(smt2, "w").writelines(new_content)
+        print(smt2)
+        # break
+    
+process_smt2_basic()
+# print(len(new_names))
+# print(count)
